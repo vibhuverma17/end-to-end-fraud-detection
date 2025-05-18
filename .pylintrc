@@ -1,0 +1,12 @@
+[MASTER]
+# Set max line length, etc.
+max-line-length=100
+
+[MESSAGES CONTROL]
+# Disable some warnings if needed, but keep essential ones.
+
+[REPORTS]
+output-format=colorized
+
+[FORMAT]
+max-module-lines=1000
