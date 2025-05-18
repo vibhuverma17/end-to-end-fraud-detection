@@ -5,7 +5,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-from data_preparation import generate_dummy_fraud_data
+from _data_preparation import generate_dummy_fraud_data
 
 
 def test_data_shape():
