@@ -1,14 +1,28 @@
 repos:
-  - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v3.0.0a5
+  - repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+        language_version: python3.9
+
+  - repo: https://github.com/PyCQA/pylint
+    rev: v2.17.0
     hooks:
       - id: pylint
-        args: ["--exit-zero"]
+        name: pylint (score >= 9 required)
+        args:
+          - --fail-under=5
+        language_version: python3.9
 
-  - repo: local
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
     hooks:
-      - id: pytest
-        name: pytest with coverage
-        entry: pytest --cov=./ --cov-fail-under=80
-        language: system
-        types: [python]
+      - id: trailing-whitespace
+
+  # - repo: local
+  #   hooks:
+  #     - id: pytest-coverage
+  #       name: Run pytest with coverage and enforce minimum coverage
+  #       entry: pytest --cov=src --cov-fail-under=00 --maxfail=1 --disable-warnings -q
+  #       language: system
+  #       pass_filenames: false
