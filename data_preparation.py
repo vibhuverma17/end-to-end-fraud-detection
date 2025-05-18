@@ -1,6 +1,7 @@
 """Data preparation module for fraud detection."""
 import numpy as np
 import pandas as pd
+import os
 
 
 def generate_dummy_fraud_data(
@@ -62,10 +63,16 @@ def generate_dummy_fraud_data(
 
 def main():
     """
-    Main function to generate dummy data and print the first few rows.
+    Main function to generate dummy data and save it to CSV.
     """
     data_frame = generate_dummy_fraud_data()
-    print(data_frame.head())
+
+    # Ensure data directory exists
+    os.makedirs("./data", exist_ok=True)
+
+    # Save to CSV
+    data_frame.to_csv("./data/fraud_data.csv", index=False)
+    print("Data generated and saved to ./data/fraud_data.csv")
 
 
 if __name__ == "__main__":

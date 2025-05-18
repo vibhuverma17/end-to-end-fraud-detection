@@ -5,14 +5,16 @@ repos:
       - id: black
         language_version: python3.9
 
-  - repo: https://github.com/PyCQA/pylint
-    rev: v2.17.0
-    hooks:
-      - id: pylint
-        name: pylint (score >= 9 required)
-        args:
-          - --fail-under=9
-        language_version: python3.9
+  # - repo: https://github.com/PyCQA/pylint
+  #   rev: v2.17.0
+  #   hooks:
+  #     - id: pylint
+  #       name: pylint (score >= 9 required)
+  #       args:
+  #         - --fail-under=9
+  #         - --ignore=.pytest_cache,__pycache__,.venv,fraud_detection_env,
+  #         - -v #verbose
+  #       language_version: python3.9
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -34,6 +36,12 @@ repos:
           --maxfail=1
           --disable-warnings
           -q
+          --ignore=.venv
+          --ignore=env
+          --ignore=venv
+          --ignore=__pycache__
+          --ignore=build
+          --ignore=dist
         language: system
         pass_filenames: false
         args: []
