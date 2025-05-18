@@ -1,32 +1,72 @@
+"""Data preparation module for fraud detection."""
 import numpy as np
 import pandas as pd
 
-def generate_dummy_fraud_data(num_samples=10000, fraud_ratio=0.05, random_state=42):
+
+def generate_dummy_fraud_data(
+    num_samples: int = 10000, fraud_ratio: float = 0.05, random_state: int = 42
+) -> pd.DataFrame:
+    """
+    Generate a synthetic dataset for fraud detection.
+
+    The dataset simulates transaction features with a controlled ratio
+    of fraudulent transactions.
+
+    Args:
+        num_samples (int): Number of samples to generate. Defaults to 10,000.
+        fraud_ratio (float): Proportion of fraudulent transactions in the data.
+                             Should be between 0 and 1. Defaults to 0.05.
+        random_state (int): Random seed for reproducibility. Defaults to 42.
+
+    Returns:
+        pd.DataFrame: DataFrame containing the simulated transactions with
+                      columns:
+                      - transaction_amount (float): Amount of the transaction.
+                      - transaction_time (int): Hour of the transaction (0-23).
+                      - user_id (int): Simulated user ID.
+                      - location (str): Geographical region of the transaction.
+                      - is_fraud (int): Binary label, 1 for fraud, 0 otherwise.
+    """
+    # Input validation
+    if not isinstance(num_samples, int) or num_samples <= 0:
+        raise ValueError("num_samples must be a positive integer")
+    if not isinstance(fraud_ratio, (int, float)) or not 0 <= fraud_ratio <= 1:
+        raise ValueError("fraud_ratio must be between 0 and 1")
+    if not isinstance(random_state, int):
+        raise ValueError("random_state must be an integer")
+
     np.random.seed(random_state)
-    
-    # Features
-    transaction_amount = np.random.exponential(scale=100, size=num_samples)  # amounts skewed positive
-    transaction_time = np.random.randint(0, 24, size=num_samples)  # hour of day (0-23)
-    user_id = np.random.randint(1000, 2000, size=num_samples)  # dummy user IDs
-    location = np.random.choice(['US', 'EU', 'ASIA', 'OTHER'], size=num_samples, p=[0.5, 0.2, 0.2, 0.1])
-    
-    # Fraud label: imbalanced with fraud_ratio positive class
-    is_fraud = np.random.choice([0, 1], size=num_samples, p=[1-fraud_ratio, fraud_ratio])
-    
-    # Create DataFrame
-    df = pd.DataFrame({
-        'transaction_amount': transaction_amount,
-        'transaction_time': transaction_time,
-        'user_id': user_id,
-        'location': location,
-        'is_fraud': is_fraud
-    })
-    
-    return df
 
-# Generate and save
-df = generate_dummy_fraud_data()
-print(df.head())
+    transaction_amount = np.random.exponential(scale=100, size=num_samples)
+    transaction_time = np.random.randint(0, 24, size=num_samples)
+    user_id = np.random.randint(1000, 2000, size=num_samples)
+    location = np.random.choice(
+        ["US", "EU", "ASIA", "OTHER"], size=num_samples, p=[0.5, 0.2, 0.2, 0.1]
+    )
+    is_fraud = np.random.choice(
+        [0, 1], size=num_samples, p=[1 - fraud_ratio, fraud_ratio]
+    )
 
-# Save to CSV for future use
-df.to_csv('dummy_fraud_data.csv', index=False)
+    dataframe = pd.DataFrame(
+        {
+            "transaction_amount": transaction_amount,
+            "transaction_time": transaction_time,
+            "user_id": user_id,
+            "location": location,
+            "is_fraud": is_fraud,
+        }
+    )
+
+    return dataframe
+
+
+def main():
+    """
+    Main function to generate dummy data and print the first few rows.
+    """
+    data_frame = generate_dummy_fraud_data()
+    print(data_frame.head())
+
+
+if __name__ == "__main__":
+    main()

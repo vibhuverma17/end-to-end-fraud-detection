@@ -15,14 +15,15 @@ This project is an end-to-end workflow for building, deploying, and monitoring a
 1. Clone the repo:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/end-to-end-fraud-detection.git
-   cd end-to-end-fraud-detection
+   git clone <your-repository-url>
+   cd fraud-detection-project
    ```
 
-2. Install dependencies:
+2. Create and activate the conda environment:
 
    ```bash
-   pip install -r requirements.txt
+   conda env create -f environment.yml
+   conda activate fraud_detection_env
    ```
 
 3. Enable pre-commit hooks:
@@ -34,7 +35,7 @@ This project is an end-to-end workflow for building, deploying, and monitoring a
 4. Run tests and check coverage:
 
    ```bash
-   pytest --cov=./
+   pytest --cov=. --cov-report=term
    ```
 
 ## ✅ Usage
@@ -42,7 +43,7 @@ This project is an end-to-end workflow for building, deploying, and monitoring a
 * Generate dummy data:
 
   ```bash
-  python generate_dummy_data.py
+  python data_preparation.py
   ```
 
 * Train and test the model:
@@ -56,11 +57,12 @@ This project is an end-to-end workflow for building, deploying, and monitoring a
   * Locally with Flask/FastAPI.
   * On AWS SageMaker.
 
-## 📂 Directory Structure
+## 📂 Current Structure
 
-* `data/` - Raw and processed data files.
-* `scripts/` - Python scripts for data generation, training, and deployment.
-* `tests/` - Unit and integration tests.
+* `data_preparation.py` - Data generation and preprocessing functions.
+* `test_data_preparation.py` - Unit tests for data preparation.
+* `environment.yml` - Conda environment configuration with all dependencies.
+* `.pre-commit-config.yaml` - Pre-commit hooks configuration.
 
 ## 🛡️ License
 

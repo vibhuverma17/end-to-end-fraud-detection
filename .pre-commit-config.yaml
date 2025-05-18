@@ -11,7 +11,7 @@ repos:
       - id: pylint
         name: pylint (score >= 9 required)
         args:
-          - --fail-under=5
+          - --fail-under=9
         language_version: python3.9
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -19,10 +19,21 @@ repos:
     hooks:
       - id: trailing-whitespace
 
-  # - repo: local
-  #   hooks:
-  #     - id: pytest-coverage
-  #       name: Run pytest with coverage and enforce minimum coverage
-  #       entry: pytest --cov=src --cov-fail-under=00 --maxfail=1 --disable-warnings -q
-  #       language: system
-  #       pass_filenames: false
+  # Local repository for custom hooks.
+  # This hook runs pytest with coverage enforcement to ensure code quality
+  # and maintain a minimum test coverage threshold of 80%.
+  - repo: local
+    hooks:
+      - id: pytest-coverage
+        name: Run pytest with coverage and enforce minimum coverage
+        entry: >
+          pytest
+          --cov=.
+          --cov-report=term
+          --cov-fail-under=80
+          --maxfail=1
+          --disable-warnings
+          -q
+        language: system
+        pass_filenames: false
+        args: []

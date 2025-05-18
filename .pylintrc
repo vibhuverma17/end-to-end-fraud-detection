@@ -3,6 +3,7 @@
 max-line-length=100
 
 [MESSAGES CONTROL]
+disable=E0401
 # Disable some warnings if needed, but keep essential ones.
 
 [REPORTS]
