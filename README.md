@@ -15,8 +15,8 @@ This project is an end-to-end workflow for building, deploying, and monitoring a
 1. Clone the repo:
 
    ```bash
-   git clone <your-repository-url>
-   cd fraud-detection-project
+   https://github.com/vibhuverma17/end-to-end-fraud-detection.git
+   cd end-to-end-fraud-detection
    ```
 
 2. Create and activate the conda environment:
