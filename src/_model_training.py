@@ -8,6 +8,7 @@ import pandas as pd
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+import numpy as np
 
 
 def load_data(data_path: str) -> pd.DataFrame:
@@ -47,6 +48,14 @@ def save_model(model: xgb.XGBClassifier, model_path: str) -> None:
     os.makedirs(os.path.dirname(model_path), exist_ok=True)
     joblib.dump(model, model_path)
     print(f"✅ Model saved to {model_path}")
+
+
+def predict_model(model, data: pd.DataFrame) -> np.ndarray:
+    """
+    Uses a trained model to generate predictions on processed data.
+    Assumes the input is already preprocessed and includes features only (no target).
+    """
+    return model.predict(data)
 
 
 def main() -> None:
