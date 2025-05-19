@@ -81,14 +81,35 @@ If you want to run components manually:
 ## 📂 Project Structure
 
 ```
-├── _data_preparation.py         # Synthetic data generation and basic preparation
-├── _preprocessing.py            # Feature engineering and preprocessing
-├── _model_training.py           # Model training and evaluation logic
-├── test/                        # Unit tests for model training
-├── environment.yml              # Conda environment config
-├── pytest.ini                   # Pytest settings (e.g., warning filters)
-├── run_pipeline.sh              # Shell script to automate the pipeline
-└── README.md                    # Project documentation
+end-to-end/
+│
+├── data/                     # Sample datasets
+├── src/
+│   ├── __init__.py
+│   ├── _data_preparation.py
+│   ├── _preprocessing.py
+│   ├── _model_training.py
+│
+├── tests/
+│   ├── unit/
+│   │   ├── test_data_preparation.py
+│   │   ├── test_preprocessing.py
+│   │   ├── test_model_training.py
+│   ├── integration/
+│   │   └── test_pipeline_integration.py
+│   ├── e2e/
+│   │   └── test_full_workflow.py
+│   ├── regression/
+│   │   └── test_model_regression.py
+│   ├── smoke/
+│       └── test_smoke_pipeline.py
+│
+├── .github/workflows/        # GitHub Actions CI/CD workflows
+│   └── test.yml
+│
+├── requirements.txt
+├── pytest.ini
+└── README.md
 ```
 
 ## 🛡️ License
