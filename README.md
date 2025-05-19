@@ -84,9 +84,7 @@ If you want to run components manually:
 ├── _data_preparation.py         # Synthetic data generation and basic preparation
 ├── _preprocessing.py            # Feature engineering and preprocessing
 ├── _model_training.py           # Model training and evaluation logic
-├── test_data_preparation.py     # Unit tests for data preparation
-├── test_preprocessing.py        # Unit tests for preprocessing
-├── test_model_training.py       # Unit tests for model training
+├── test/                        # Unit tests for model training
 ├── environment.yml              # Conda environment config
 ├── pytest.ini                   # Pytest settings (e.g., warning filters)
 ├── run_pipeline.sh              # Shell script to automate the pipeline

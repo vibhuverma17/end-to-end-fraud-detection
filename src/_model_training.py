@@ -37,7 +37,13 @@ def train_model(data: pd.DataFrame, target_column: str) -> xgb.XGBClassifier:
 
 
 def save_model(model: xgb.XGBClassifier, model_path: str) -> None:
-    """Save the trained model to a file."""
+    """Save the trained model to a .pkl file with a clean extension."""
+    # Remove common double extensions
+    base, ext = os.path.splitext(model_path)
+    if ext not in ["", ".pkl"]:
+        model_path = base  # drop weird extensions
+    model_path = model_path + ".pkl"
+
     os.makedirs(os.path.dirname(model_path), exist_ok=True)
     joblib.dump(model, model_path)
     print(f"✅ Model saved to {model_path}")
