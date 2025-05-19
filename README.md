@@ -1,4 +1,4 @@
-# End-to-End Fraud Detection Model Training Pipeline
+## End-to-End Fraud Detection Model Training Pipeline
 
 This project implements a complete pipeline for training a machine learning model to detect fraudulent transactions. It includes data preparation, preprocessing, model training, testing, and automation for reproducibility and quality assurance.
 
