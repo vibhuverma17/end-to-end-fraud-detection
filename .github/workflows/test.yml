@@ -20,17 +20,31 @@ jobs:
           auto-activate-base: false
           environment-file: environment.yml
           activate-environment: fraud_detection_env
-          python-version: 3.9  # match your .yml version
+          python-version: 3.9
           auto-update-conda: true
 
-      - name: Install pytest and coverage tools
+      - name: Install additional dev tools
         shell: bash -l {0}
         run: |
           conda activate fraud_detection_env
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov pylint
 
       - name: Run tests with coverage
         shell: bash -l {0}
         run: |
           conda activate fraud_detection_env
           pytest --cov=src --cov-report=term --cov-fail-under=80
+
+      - name: Run pylint on src/ and enforce score ≥ 8.0
+        shell: bash -l {0}
+        run: |
+          conda activate fraud_detection_env
+          echo "Running pylint on src/..."
+          score=$(pylint src --exit-zero --score=y | grep "Your code has been rated at" | awk '{print $7}' | cut -d'/' -f1)
+          echo "Pylint score: $score"
+          if (( $(echo "$score < 8.0" | bc -l) )); then
+            echo "❌ Pylint score is below 8.0"
+            exit 1
+          else
+            echo "✅ Pylint score passed"
+          fi
