@@ -99,8 +99,6 @@ end-to-end/
 │   │   └── test_pipeline_integration.py
 │   ├── e2e/
 │   │   └── test_full_workflow.py
-│   ├── regression/
-│   │   └── test_model_regression.py
 │   ├── smoke/
 │       └── test_smoke_pipeline.py
 │
