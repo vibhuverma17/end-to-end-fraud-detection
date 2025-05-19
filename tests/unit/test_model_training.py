@@ -4,14 +4,15 @@ Unit tests for the model training module.
 
 import os
 import tempfile
-import pandas as pd
-import pytest
-import joblib
-import numpy as np
-from xgboost import XGBClassifier
 from unittest import mock
 
-from _model_training import train_model, save_model, predict_model, main
+import joblib
+import numpy as np
+import pandas as pd
+import pytest
+from xgboost import XGBClassifier
+
+from _model_training import main, predict_model, save_model, train_model
 
 
 @pytest.fixture()

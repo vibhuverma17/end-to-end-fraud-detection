@@ -1,14 +1,17 @@
 # tests/integration/test_pipeline_integration.py
 
-import pytest
-import sys
 import os
+import sys
+
+import pytest
 
 sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src"))
 )
 
-import _data_preparation, _preprocessing, _model_training
+import _data_preparation
+import _model_training
+import _preprocessing
 
 
 def test_data_pipeline_to_model_training():

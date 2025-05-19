@@ -3,12 +3,13 @@ Model training module using XGBoost for fraud detection.
 """
 
 import os
+
 import joblib
+import numpy as np
 import pandas as pd
 import xgboost as xgb
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-import numpy as np
+from sklearn.model_selection import train_test_split
 
 
 def load_data(data_path: str) -> pd.DataFrame:

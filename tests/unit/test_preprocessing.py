@@ -1,5 +1,6 @@
-import pytest
 import pandas as pd
+import pytest
+
 from _preprocessing import load_data, preprocess_data
 
 

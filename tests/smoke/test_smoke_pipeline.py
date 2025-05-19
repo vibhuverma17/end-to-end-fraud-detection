@@ -8,8 +8,8 @@ sys.path.insert(
 
 def test_smoke_pipeline_runs():
     from _data_preparation import generate_dummy_fraud_data
+    from _model_training import predict_model, train_model
     from _preprocessing import preprocess_data
-    from _model_training import train_model, predict_model
 
     # Just make sure the pipeline runs without crashing
     data = generate_dummy_fraud_data()

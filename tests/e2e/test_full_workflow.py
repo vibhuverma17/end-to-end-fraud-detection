@@ -2,6 +2,7 @@
 
 import os
 import sys
+
 import pytest
 
 sys.path.insert(
@@ -9,8 +10,8 @@ sys.path.insert(
 )
 
 import _data_preparation
-import _preprocessing
 import _model_training
+import _preprocessing
 
 
 def test_end_to_end_pipeline():

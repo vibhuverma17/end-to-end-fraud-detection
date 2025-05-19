@@ -1,7 +1,9 @@
 """Data preparation module for fraud detection."""
+
+import os
+
 import numpy as np
 import pandas as pd
-import os
 
 
 def generate_dummy_fraud_data(

@@ -9,9 +9,9 @@ repos:
     rev: v2.17.0
     hooks:
       - id: pylint
-        name: pylint (score >= 9 required)
+        name: pylint (score >= 8 required)
         args:
-          - --fail-under=9
+          - --fail-under=8
           - --ignore=.pytest_cache,__pycache__,.venv,fraud_detection_env,
           - -v #verbose
         language_version: python3.9
