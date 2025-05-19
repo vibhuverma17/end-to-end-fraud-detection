@@ -37,8 +37,10 @@ def train_model(data: pd.DataFrame, target_column: str) -> xgb.XGBClassifier:
 
 
 def save_model(model: xgb.XGBClassifier, model_path: str) -> None:
-    """Saves the trained model to the given path."""
+    """Save the trained model to a file."""
+    os.makedirs(os.path.dirname(model_path), exist_ok=True)
     joblib.dump(model, model_path)
+    print(f"✅ Model saved to {model_path}")
 
 
 def main() -> None:

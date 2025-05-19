@@ -57,22 +57,28 @@ def preprocess_data(df: pd.DataFrame):
 
     X_processed = preprocessor.fit_transform(X)
 
-    return X_processed, y, preprocessor
+    # Combine processed features and target into a single DataFrame
+    feature_names = numeric_features + list(
+        preprocessor.named_transformers_["cat"].get_feature_names_out(
+            categorical_features
+        )
+    )
+    X_processed_df = pd.DataFrame(
+        X_processed.toarray() if hasattr(X_processed, "toarray") else X_processed,
+        columns=feature_names,
+        index=X.index,
+    )
+    # Add the target column to the DataFrame
+    X_processed_df["is_fraud"] = y.values
+    return X_processed_df, preprocessor
 
 
-def split_data(X, y, test_size=0.2, random_state=42):
-    """
-    Split data into training and testing sets.
+if __name__ == "__main__":
+    import os
 
-    Args:
-        X: Features.
-        y: Target labels.
-        test_size (float): Proportion of test set.
-        random_state (int): Random seed.
+    df_raw = load_data("data/fraud_data.csv")
+    df_processed, preprocessor = preprocess_data(df_raw)
 
-    Returns:
-        X_train, X_test, y_train, y_test
-    """
-    from sklearn.model_selection import train_test_split
-
-    return train_test_split(X, y, test_size=test_size, random_state=random_state)
+    os.makedirs("data/processed", exist_ok=True)
+    df_processed.to_csv("data/processed/fraud_data.csv", index=False)
+    print("✅ Preprocessed data saved to data/processed/fraud_data.csv")

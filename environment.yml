@@ -6,6 +6,7 @@ dependencies:
   - python=3.9
   - numpy=2.0.2
   - pandas=2.2.3
+  - pip
   - pip:
       - astroid==3.3.10
       - cfgv==3.4.0

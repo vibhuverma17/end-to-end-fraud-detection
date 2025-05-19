@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from _preprocessing import load_data, preprocess_data, split_data
+from _preprocessing import load_data, preprocess_data
 
 
 @pytest.fixture
@@ -28,20 +28,18 @@ def test_load_data(tmp_csv):
 
 def test_preprocess_data(tmp_csv):
     df = load_data(str(tmp_csv))
-    X_processed, y, preprocessor = preprocess_data(df)
-    assert X_processed.shape[0] == len(df)
-    assert len(y) == len(df)
+    df_processed, preprocessor = preprocess_data(df)
+
+    # Check that output is a DataFrame and includes the target column
+    assert isinstance(df_processed, pd.DataFrame)
+    assert "is_fraud" in df_processed.columns
+
+    # Ensure row counts match
+    assert df_processed.shape[0] == len(df)
+
     from sklearn.compose import ColumnTransformer
 
     assert isinstance(preprocessor, ColumnTransformer)
-
-
-def test_split_data(tmp_csv):
-    df = load_data(str(tmp_csv))
-    X_processed, y, _ = preprocess_data(df)
-    X_train, X_test, y_train, y_test = split_data(X_processed, y)
-    assert len(X_train) > 0 and len(X_test) > 0
-    assert len(y_train) > 0 and len(y_test) > 0
 
 
 def test_load_data_file_not_found():

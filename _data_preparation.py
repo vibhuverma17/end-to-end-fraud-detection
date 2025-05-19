@@ -72,7 +72,7 @@ def main():
 
     # Save to CSV
     data_frame.to_csv("./data/fraud_data.csv", index=False)
-    print("Data generated and saved to ./data/fraud_data.csv")
+    print("✅Base Dummy Data generated and saved to ./data/fraud_data.csv")
 
 
 if __name__ == "__main__":
